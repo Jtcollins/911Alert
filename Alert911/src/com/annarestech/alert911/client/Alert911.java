@@ -32,8 +32,8 @@ public class Alert911 implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
+	private final InterfaceServiceAsync interfaceService = GWT
+			.create(InterfaceService.class);
 
 	/**
 	 * This is the entry point method.
@@ -119,7 +119,7 @@ public class Alert911 implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
+				interfaceService.interfaceServer(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
