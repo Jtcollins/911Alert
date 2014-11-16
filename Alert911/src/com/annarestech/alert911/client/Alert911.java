@@ -32,7 +32,7 @@ public class Alert911 implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
-	private final GreetServiceAsync interfaceService = GWT
+	private final GreetServiceAsync greetService = GWT
 			.create(GreetService.class);
 
 	/**
@@ -40,6 +40,7 @@ public class Alert911 implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Submit Details");
+		final Button simButton = new Button(".");
 		final TextBox nameField = new TextBox();
 		final TextBox phoneField = new TextBox();
 		final TextBox zipcodeField = new TextBox();
@@ -60,6 +61,7 @@ public class Alert911 implements EntryPoint {
 		RootPanel.get("zipcodeFieldContainer").add(zipcodeField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
+		RootPanel.get("simButtonContainer").add(simButton);
 		//RootPanel.get("disclaimerLabelContainer").add(disclaimerLabel);
 
 		// Focus the cursor on the name field when the app loads
@@ -77,7 +79,7 @@ public class Alert911 implements EntryPoint {
 		final HTML serverResponseLabel = new HTML();
 		VerticalPanel dialogVPanel = new VerticalPanel();
 		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
+		dialogVPanel.add(new HTML("<b>Sending details to the server:</b>"));
 		dialogVPanel.add(textToServerLabel);
 		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
 		dialogVPanel.add(serverResponseLabel);
@@ -93,6 +95,20 @@ public class Alert911 implements EntryPoint {
 				sendButton.setFocus(true);
 			}
 		});
+		
+		simButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+					String offense = "WEAPON-DISCHARGE";
+					greetService.simulate(new AsyncCallback<String>() {
+							public void onFailure(Throwable caught) {
+								// Show the RPC error message to the user
+
+							}
+
+							public void onSuccess(String result) {}});
+			}
+		});
+	
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
@@ -134,7 +150,7 @@ public class Alert911 implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(nameToServer + ", "+ phoneToServer + ", " + zipToServer);
 				serverResponseLabel.setText("");
-				interfaceService.greetServer(nameToServer, phoneToServer, zipToServer,
+				greetService.greetServer(nameToServer, phoneToServer, zipToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
@@ -157,7 +173,11 @@ public class Alert911 implements EntryPoint {
 							}
 						});
 			}
+			
+			
+
 		}
+		
 
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();

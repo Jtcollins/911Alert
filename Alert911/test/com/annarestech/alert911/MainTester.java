@@ -22,10 +22,7 @@ public class MainTester {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CityDepartment city = new CityDepartment("Seattle","", "", "http://www.google.com");
-		String myPhone = "+15104093175";
-		User me = new User("Jesse", myPhone, "98101");
-		testSingleText(city, myPhone, "It works!!");
+		
 	}
 
 }

@@ -3,7 +3,6 @@ package com.annarestech.alert911.server;
 import com.annarestech.alert911.client.GreetService;
 import com.annarestech.alert911.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 import com.twilio.sdk.*;
 import com.twilio.*;
 
@@ -48,7 +47,7 @@ public class GreetServiceImpl extends RemoteServiceServlet implements
 		//		+ ".<br><br>It looks like you are using:<br>" + userAgent;
 
 		if(city.addUser(user))	{
-			return "User Added!";
+			return "Thank you " + name + ", You have been Added! Check your phone";
 		} else	{
 			return "Error adding user, please refresh and try again.";
 		}
@@ -67,5 +66,22 @@ public class GreetServiceImpl extends RemoteServiceServlet implements
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
+	}
+
+	@Override
+	public String simulate() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		UserBase uBase = city.uBase; 
+		String mess = "WARNING. ";
+		String offense = "WEAPON-DISCHARGE";
+		mess += offense;
+		mess += " occured at ";
+		String location = "1XX BLOCK OF OCCIDENTAL AV S";
+		mess += location;
+		mess += " Please avoid the area";
+		System.out.println("Execute Sim");
+		
+		city.tServ.textAll(uBase, mess);
+		return null;
 	}
 }

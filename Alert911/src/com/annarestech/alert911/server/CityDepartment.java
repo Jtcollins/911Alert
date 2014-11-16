@@ -1,9 +1,12 @@
 package com.annarestech.alert911.server;
 
-import java.net.MalformedURLException;
+import java.net.MalformedURLException;import com.google.appengine.api.ThreadManager;
+import java.util.concurrent.atomic.AtomicLong;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Hashtable;
+import com.google.appengine.api.backends.BackendService;
+import com.google.appengine.api.backends.BackendServiceFactory;
 
 import com.twilio.*;
 
@@ -16,24 +19,42 @@ public class CityDepartment {
 	private Hashtable<String, Location> locTable;
 	private HashSet<String> keywords;
 	private CallStream callStream;
-	private static TextService tServ;
-	private static UserBase uBase;
+	public static TextService tServ;
+	public static UserBase uBase;
 	public String Dep;
+	public CityDepartment c;
+	AtomicLong counter = new AtomicLong();
 	
 	public CityDepartment(String Dept, String account, String auth, String urlStream)	{
 		
 		URL stream;
+		this.c = this;
 		keywords = new HashSet<String>();
 		keywords.add("WEAPON-DISCHARGE");
 		keywords.add("THREATS-KILL");
 		keywords.add("THREATS-WEAPON");
 		//Thread crimeLoop = new Thread((Runnable) new CallStream(SEATTLE_DATA, keywords));
-		//crimeLoop.start();
+		//crimeLoop.start();Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
 
 		tServ = new TextService(ACCOUNT_SID, AUTH_TOKEN);
 		locTable = new Hashtable();
 		uBase = new UserBase(this);
+		thread.start();
 	}
+	
+	Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
+		  public void run() {
+		    try {
+		      while (true) {
+		        counter.incrementAndGet();
+		        callStream = new CallStream(this, c, SEATTLE_DATA, keywords);
+		        Thread.sleep(10);
+		      }
+		    } catch (InterruptedException ex) {
+		      throw new RuntimeException("Interrupted in loop:", ex);
+		    }
+		  }
+		});
 	
 	public boolean testTexts(String phone, String mess)	{
 		tServ.textNum(phone, mess);
@@ -43,6 +64,10 @@ public class CityDepartment {
 	public boolean addUser(String name, String phone, String zip)	{
 		User user = new User(name, phone, zip);
 		return addUser(user);
+	}
+	
+	public Hashtable<String, Location> getLocT()	{
+		return locTable;
 	}
 	
 	public boolean addUser(User u)	{

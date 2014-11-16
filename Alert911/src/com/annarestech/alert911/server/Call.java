@@ -18,7 +18,7 @@ public class Call {
 	private int callerID;
 	private Location loc;
 	
-	Call(float lat, float longitude, String hundredBlock)	{
+	Call(CityDepartment c, float lat, float longitude, String hundredBlock)	{
 		latlong = LATLON_TEMPLATE + lat + "," + longitude;
 		details = hundredBlock;
 		String rawString = "";
@@ -45,7 +45,11 @@ public class Call {
 		for(int i = 0; i < addressArray.size(); i++)	{
 			if(((JsonElement) ((JsonObject) addressArray.get(i)).get("types")).toString().equals("[\"postal_code\"]"))	{
 				zipCode = Integer.parseInt(((JsonElement) ((JsonObject) addressArray.get(i)).get("short_name")).toString().substring(1, 6));
-			}	
+			}
+			loc = c.getLocT().get(Integer.toString(zipCode));
+			for(int j = 0; j < loc.uBase.uBase.size(); i++)	{
+				
+			}
 			
 		}
 		

@@ -57,7 +57,7 @@ public class TextService {
 	public boolean textAllinZip(Location loc, String message)	{
 		try	{
 			 Message mess = messageFactory.create(params); 
-			 System.out.println(mess.getSid()); 
+			 System.out.println(mess.getSid());
 			 messageFactory.create(params);
 			 return true;
 		 } catch(Exception e)	{

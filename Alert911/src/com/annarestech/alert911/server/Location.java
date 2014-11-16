@@ -2,7 +2,7 @@ package com.annarestech.alert911.server;
 
 public class Location {
 	private String zipCode;
-	private UserBase uBase;
+	public UserBase uBase;
 	private CityDepartment cDep;
 	
 	Location(CityDepartment dep, String zip)	{
