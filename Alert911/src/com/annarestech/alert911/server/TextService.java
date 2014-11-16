@@ -35,26 +35,42 @@ import org.apache.http.message.BasicNameValuePair;
 public class TextService {
 	private MessageFactory messageFactory;
 	private List<NameValuePair> params;
+	private String fromNum;
 	
 	
 	TextService(String account, String auth)	{
 		TwilioRestClient client = new TwilioRestClient(account, auth);
+		fromNum = "+15107275968";
 		// Build the parameters 
 		 List<NameValuePair> params = new ArrayList<NameValuePair>();  
-		 params.add(new BasicNameValuePair("From", "+15107275968"));    
+		 params.add(new BasicNameValuePair("From", fromNum));    
 		 
 		 messageFactory = client.getAccount().getMessageFactory();
 	}
 	
-	public boolean textAllinZip(Location loc)	{
+	public boolean textAllinZip(Location loc, String message)	{
 		try	{
-			 Message message = messageFactory.create(params); 
-			 System.out.println(message.getSid()); 
+			 Message mess = messageFactory.create(params); 
+			 System.out.println(mess.getSid()); 
+			 messageFactory.create(params);
 			 return true;
 		 } catch(Exception e)	{
 			 System.out.println("Message Failed Creation");
 			 return false;
 		 }
+	}
+	
+	public boolean textNum(String number, String message)	{
+		try {
+			Message m = messageFactory.create(params);
+			params.add(new BasicNameValuePair("To", number));
+			params.add(new BasicNameValuePair("Body", message));
+			return true;
+		} catch (TwilioRestException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 	
 	/**

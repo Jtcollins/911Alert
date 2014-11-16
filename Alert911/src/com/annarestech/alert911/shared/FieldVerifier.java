@@ -44,14 +44,14 @@ public class FieldVerifier {
 		if (zip == null) {
 			return false;
 		}
-		return zip.length() != 5;
+		return zip.length() == 5;
 	}
 	
 	public static boolean isValidPhone(String phone) {
 		if (phone == null) {
 			return false;
 		}
-		return phone.length() != 10;
+		return phone.length() == 10;
 	}
 	
 	public static String sanitizeZip(String zip)	{

@@ -1,3 +1,2 @@
 # Module alert911
 # RPC service class, partial path of RPC policy file
-com.annarestech.alert911.client.InterfaceService, 70283435ADDDCE0DB6BD775BDC94955C.gwt.rpc

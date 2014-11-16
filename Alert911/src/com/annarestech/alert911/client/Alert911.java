@@ -46,6 +46,7 @@ public class Alert911 implements EntryPoint {
 		nameField.setText("Name");
 		phoneField.setText("Number without symbols or spaces");
 		zipcodeField.setText("Zip Code");
+		final Label disclaimer = new Label();
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
