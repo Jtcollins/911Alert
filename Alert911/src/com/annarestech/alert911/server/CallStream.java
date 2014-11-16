@@ -1,11 +1,12 @@
 package com.annarestech.alert911.server;
 
-import com.google.gwt.http.client.URL;
+
+import java.net.URL;
 import com.socrata.api.Soda2Consumer;
 
 public class CallStream {
 	
-	CallStream(URL input)	{
+	CallStream(URL stream)	{
 		Soda2Consumer callData = Soda2Consumer.newConsumer("https://sandbox.demo.socrata.com",
 				"testuser@gmail.com",
                 "OpenData",
