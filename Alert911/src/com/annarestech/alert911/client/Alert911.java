@@ -39,9 +39,13 @@ public class Alert911 implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
+		final Button sendButton = new Button("Submit Details");
 		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
+		final TextBox phoneField = new TextBox();
+		final TextBox zipcodeField = new TextBox();
+		nameField.setText("Name");
+		phoneField.setText("Number without symbols or spaces");
+		zipcodeField.setText("Zip Code");
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -50,6 +54,8 @@ public class Alert911 implements EntryPoint {
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel.get("nameFieldContainer").add(nameField);
+		RootPanel.get("phoneFieldContainer").add(phoneField);
+		RootPanel.get("zipcodeFieldContainer").add(zipcodeField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 

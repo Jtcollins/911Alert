@@ -1,0 +1,2 @@
+serviceClass: com.annarestech.alert911.client.InterfaceService
+path: 70283435ADDDCE0DB6BD775BDC94955C.gwt.rpc
