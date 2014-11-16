@@ -39,4 +39,28 @@ public class FieldVerifier {
 		}
 		return name.length() > 3;
 	}
+	
+	public static boolean isValidZip(String zip) {
+		if (zip == null) {
+			return false;
+		}
+		return zip.length() != 5;
+	}
+	
+	public static boolean isValidPhone(String phone) {
+		if (phone == null) {
+			return false;
+		}
+		return phone.length() != 10;
+	}
+	
+	public static String sanitizeZip(String zip)	{
+		return zip;
+	}
+	
+	public static int sanitizePhone(String phone)	{
+		return Integer.parseInt(phone);
+	}
+	
+	
 }

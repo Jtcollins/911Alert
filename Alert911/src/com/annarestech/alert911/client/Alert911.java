@@ -115,17 +115,23 @@ public class Alert911 implements EntryPoint {
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				String textToServer = nameField.getText();
-				if (!FieldVerifier.isValidName(textToServer)) {
+				String nameToServer = nameField.getText();
+				String phoneToServer = phoneField.getText();
+				String zipToServer = zipcodeField.getText();
+				if (!FieldVerifier.isValidName(nameToServer)) {
 					errorLabel.setText("Please enter at least four characters");
 					return;
+				} else if(!FieldVerifier.isValidPhone(phoneToServer))	{
+					
+				} else if(!FieldVerifier.isValidZip(zipToServer)){
+					
 				}
 
 				// Then, we send the input to the server.
 				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
+				textToServerLabel.setText(nameToServer + ", "+ phoneToServer + ", " + zipToServer);
 				serverResponseLabel.setText("");
-				interfaceService.interfaceServer(textToServer,
+				interfaceService.interfaceServer(nameToServer, phoneToServer, zipToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
