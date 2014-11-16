@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
+import java.util.*; 
+import com.twilio.sdk.*; 
+import com.twilio.sdk.resource.factory.*; 
+import com.twilio.sdk.resource.instance.*; 
+import com.twilio.sdk.resource.list.*; 
 import com.google.gwt.user.client.Random;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -42,7 +47,7 @@ public class TextService {
 		TwilioRestClient client = new TwilioRestClient(account, auth);
 		fromNum = "+15107275968";
 		// Build the parameters 
-		 List<NameValuePair> params = new ArrayList<NameValuePair>();  
+		 params = new ArrayList<NameValuePair>();  
 		 params.add(new BasicNameValuePair("From", fromNum));    
 		 
 		 messageFactory = client.getAccount().getMessageFactory();
@@ -62,9 +67,9 @@ public class TextService {
 	
 	public boolean textNum(String number, String message)	{
 		try {
-			Message m = messageFactory.create(params);
 			params.add(new BasicNameValuePair("To", number));
 			params.add(new BasicNameValuePair("Body", message));
+			Message m = messageFactory.create(params);
 			return true;
 		} catch (TwilioRestException e) {
 			e.printStackTrace();

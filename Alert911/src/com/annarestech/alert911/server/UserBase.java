@@ -16,4 +16,7 @@ public class UserBase {
 		return false;
 	}
 	
+	public boolean addUser(User u)	{
+		return uBase.add(u);
+	}
 }

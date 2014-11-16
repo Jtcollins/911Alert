@@ -2,15 +2,19 @@ package com.annarestech.alert911.server;
 
 public class User {
 
-	private String zipCode;
-	private String phoneNumber;
-	private String emailAddress;
-	private String name;
+	public String zipCode;
+	public String phoneNumber;
+	public String emailAddress;
+	public String name;
 	
 	public User(String name, String phone, String zip) {
 		this.name = name;
 		this.phoneNumber = phone;
 		this.zipCode = zip;
+	}
+	
+	public String getZip()	{
+		return this.zipCode;
 	}
 	
 	

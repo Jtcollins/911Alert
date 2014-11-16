@@ -10,7 +10,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class InterfaceServiceImpl extends RemoteServiceServlet implements
 		InterfaceService {
-
+	private User user;
+	private final CityDepartment city = new CityDepartment("Seattle","", "", "http://www.google.com"); //TODO: Fix this
+	
 	public String interfaceServer(String name, String phoneToServer, String zipToServer) throws IllegalArgumentException {
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(name)) {
@@ -32,7 +34,8 @@ public class InterfaceServiceImpl extends RemoteServiceServlet implements
 
 		String serverInfo = getServletContext().getServerInfo();
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-
+		user = new User(name, phoneToServer, zipToServer);
+		
 		// Escape data from the client to avoid cross-site script vulnerabilities.
 		name = escapeHtml(name);
 		//TODO: prevent xxs with other data.
@@ -40,7 +43,12 @@ public class InterfaceServiceImpl extends RemoteServiceServlet implements
 
 		//return "Hello, " + input + "!<br><br>I am running " + serverInfo
 		//		+ ".<br><br>It looks like you are using:<br>" + userAgent;
-		return null;
+
+		if(city.addUser(user) != null)	{
+			return "User Added!";
+		} else	{
+			return "Error adding user, please refresh and try again.";
+		}
 	}
 
 	/**

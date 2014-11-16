@@ -1,13 +1,17 @@
 package com.annarestech.alert911.server;
 
 public class Location {
-	private int zipCode;
+	private String zipCode;
 	private UserBase uBase;
 	private CityDepartment cDep;
 	
-	Location(CityDepartment dep, int zip)	{
+	Location(CityDepartment dep, String zip)	{
 		this.zipCode = zip;
 		cDep = dep;
 		uBase = new UserBase(cDep);
+	}
+	
+	public boolean addUser(User u)	{
+		return uBase.addUser(u);
 	}
 }

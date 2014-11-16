@@ -9,7 +9,7 @@ public class CityDepartment {
 	public static final String ACCOUNT_SID = "AC2178642fee43f41a62ce3016b6f34187";
 	public static final String AUTH_TOKEN = "aea844879d5df20922876ada64eb7390";
 	
-	private Hashtable<Integer, Location> locTable;
+	private Hashtable<String, Location> locTable;
 	private CallStream callStream;
 	private TextService tServ;
 	private UserBase uBase;
@@ -38,7 +38,20 @@ public class CityDepartment {
 	
 	public User addUser(String name, String phone, String zip)	{
 		User user = new User(name, phone, zip);
-		return user;
+		return addUser(user);
+	}
+	
+	public User addUser(User u)	{
+		uBase.addUser(u);
+		if(locTable.containsKey(u.getZip()))	{
+			Location curr = locTable.get(u.getZip());
+			curr.addUser(u);
+		} else	{
+			Location loc = new Location(this, u.getZip());
+			Location curr = locTable.put(u.getZip(), loc);
+			curr.addUser(u);
+		}
+		return u;
 	}
 	
 }

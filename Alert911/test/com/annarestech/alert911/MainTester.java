@@ -2,6 +2,7 @@ package com.annarestech.alert911;
 
 import com.annarestech.alert911.server.CityDepartment;
 import com.annarestech.alert911.server.User;
+import com.annarestech.alert911.server.*;
 
 public class MainTester {
 	
