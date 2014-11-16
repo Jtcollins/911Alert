@@ -58,8 +58,8 @@ public class FieldVerifier {
 		return zip;
 	}
 	
-	public static int sanitizePhone(String phone)	{
-		return Integer.parseInt(phone);
+	public static String sanitizePhone(String phone)	{
+		return "+1" + phone;
 	}
 	
 	

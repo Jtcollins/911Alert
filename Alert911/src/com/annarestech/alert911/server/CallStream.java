@@ -3,7 +3,9 @@ package com.annarestech.alert911.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,10 +15,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.MalformedJsonException;
 import com.socrata.api.Soda2Consumer;
 
 public class CallStream {
@@ -27,11 +28,17 @@ public class CallStream {
 	
 	CallStream(String stream, HashSet<String> keys)	{
 		String rawString = "";
+		keywords = keys;
 		Iterator<String> iterWord = keywords.iterator();
 		String currWord;
 		keywords = keys;
 		BufferedReader contentURL;
 		for(int i = 0; i < keywords.size(); i++)	{
+			try {
+				Thread.sleep(60000);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 			currWord = iterWord.next();
 			Date dateNow;
 			Date dateCrime;
@@ -48,20 +55,27 @@ public class CallStream {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			JsonParser parse = new JsonParser();
-			JsonElement elem = parse.parse(rawString);
-			JsonArray searchResults = elem.getAsJsonArray();
-			
-			for(int j = 0; j < searchResults.size(); j++)	{
-				dateNow = new Date();
-				try {
-					dateCrime = sdf.parse(searchResults.get(j).getAsJsonObject().get("date_reported").getAsString());
-					if(dateNow.getTime() - dateCrime.getTime() < 36000)	{
-						Call curr = new Call(searchResults.get(j).getAsJsonObject().get("latitude").getAsFloat(), searchResults.get(j).getAsJsonObject().get("longitude").getAsFloat(), searchResults.get(j).getAsJsonObject().get("hundred_block_location").getAsString());
+			try{
+				JsonParser parse = new JsonParser();
+				//JsonReader read = new JsonReader();
+				//read.setLenient(true);
+				JsonElement elem = parse.parse(rawString);
+				JsonArray searchResults = elem.getAsJsonArray();
+				
+				for(int j = 0; j < searchResults.size(); j++)	{
+					dateNow = new Date();
+					try {
+						dateCrime = sdf.parse(searchResults.get(j).getAsJsonObject().get("date_reported").getAsString());
+						if(dateNow.getTime() - dateCrime.getTime() < 36000)	{
+							Call curr = new Call(searchResults.get(j).getAsJsonObject().get("latitude").getAsFloat(), searchResults.get(j).getAsJsonObject().get("longitude").getAsFloat(), searchResults.get(j).getAsJsonObject().get("hundred_block_location").getAsString());
+						}
+					}catch (ParseException e) {
+							e.printStackTrace();
 					}
-				}catch (ParseException e) {
-						e.printStackTrace();
 				}
+			} catch(Exception e)	{
+				System.out.println("Malform");
+				continue;
 			}
 		}
 		/*

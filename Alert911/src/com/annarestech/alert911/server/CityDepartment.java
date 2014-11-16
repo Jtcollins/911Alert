@@ -23,10 +23,12 @@ public class CityDepartment {
 	public CityDepartment(String Dept, String account, String auth, String urlStream)	{
 		
 		URL stream;
+		keywords = new HashSet<String>();
 		keywords.add("WEAPON-DISCHARGE");
 		keywords.add("THREATS-KILL");
 		keywords.add("THREATS-WEAPON");
-		callStream = new CallStream(SEATTLE_DATA, keywords);
+		//Thread crimeLoop = new Thread((Runnable) new CallStream(SEATTLE_DATA, keywords));
+		//crimeLoop.start();
 
 		tServ = new TextService(ACCOUNT_SID, AUTH_TOKEN);
 		locTable = new Hashtable();

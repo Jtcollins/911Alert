@@ -60,7 +60,7 @@ public class Alert911 implements EntryPoint {
 		RootPanel.get("zipcodeFieldContainer").add(zipcodeField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
-		RootPanel.get("disclaimerLabelContainer").add(disclaimerLabel);
+		//RootPanel.get("disclaimerLabelContainer").add(disclaimerLabel);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);

@@ -66,6 +66,11 @@ public class TextService {
 		 }
 	}
 	
+	public boolean newUser(String number)	{
+		String welcome = "Thank you for signing up, you will now be alerted";
+		return textNum(number, welcome);
+	}
+	
 	public boolean textNum(String number, String message)	{
 		try {
 			params.add(new BasicNameValuePair("To", number));
@@ -78,6 +83,7 @@ public class TextService {
 		}
 		
 	}
+	
 	
 	/**
 	 * 
