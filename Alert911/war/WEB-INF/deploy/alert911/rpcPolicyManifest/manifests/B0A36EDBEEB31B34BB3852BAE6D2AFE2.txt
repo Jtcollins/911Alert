@@ -1,0 +1,2 @@
+serviceClass: com.annarestech.alert911.client.GreetService
+path: 6B8CF73F50BF1BBCA7DA4CF8B8F7E9A6.gwt.rpc

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import java.util.*; 
 import com.twilio.sdk.*; 
+import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.*; 
 import com.twilio.sdk.resource.instance.*; 
 import com.twilio.sdk.resource.list.*; 

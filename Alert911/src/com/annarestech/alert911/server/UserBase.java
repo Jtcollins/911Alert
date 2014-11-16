@@ -9,6 +9,7 @@ public class UserBase {
 	
 	UserBase(CityDepartment city)	{
 		this.city = city;
+		uBase = new ArrayList<User>();
 	}
 	
 	public boolean addUser(String name, String phone, String zip)	{

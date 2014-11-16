@@ -32,8 +32,8 @@ public class Alert911 implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
-	private final InterfaceServiceAsync interfaceService = GWT
-			.create(InterfaceService.class);
+	private final GreetServiceAsync interfaceService = GWT
+			.create(GreetService.class);
 
 	/**
 	 * This is the entry point method.
@@ -125,16 +125,16 @@ public class Alert911 implements EntryPoint {
 					errorLabel.setText("Please enter at least four characters");
 					return;
 				} else if(!FieldVerifier.isValidPhone(phoneToServer))	{
-					
+					errorLabel.setText("Wrong Phone Number");
 				} else if(!FieldVerifier.isValidZip(zipToServer)){
-					
+					errorLabel.setText("Wrong Phone Number");
 				}
 
 				// Then, we send the input to the server.
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(nameToServer + ", "+ phoneToServer + ", " + zipToServer);
 				serverResponseLabel.setText("");
-				interfaceService.interfaceServer(nameToServer, phoneToServer, zipToServer,
+				interfaceService.greetServer(nameToServer, phoneToServer, zipToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user

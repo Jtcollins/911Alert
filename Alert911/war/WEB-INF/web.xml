@@ -7,12 +7,12 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>interfaceServlet</servlet-name>
-    <servlet-class>com.annarestech.alert911.server.InterfaceServiceImpl</servlet-class>
+    <servlet-name>greetServlet</servlet-name>
+    <servlet-class>com.annarestech.alert911.server.GreetServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>interfaceServlet</servlet-name>
+    <servlet-name>greetServlet</servlet-name>
     <url-pattern>/alert911/greet</url-pattern>
   </servlet-mapping>
   
