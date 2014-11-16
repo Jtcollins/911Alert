@@ -11,4 +11,9 @@ public class UserBase {
 		this.city = city;
 	}
 	
+	public boolean addUser(String name, String phone, String zip)	{
+		User curr = new User(name, phone, zip);
+		return false;
+	}
+	
 }

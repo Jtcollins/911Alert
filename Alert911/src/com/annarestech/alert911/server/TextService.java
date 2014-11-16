@@ -57,6 +57,11 @@ public class TextService {
 		 }
 	}
 	
+	/**
+	 * 
+	 * @param phone
+	 * @return a random integer that will be used to confirm the User with the number.
+	 */
 	public int textConfirmation(String phone)	{
 		int rand = Random.nextInt(1000000);
 		try	{
@@ -65,6 +70,7 @@ public class TextService {
 		 } catch(Exception e)	{
 			 System.out.println("Message Failed Creation");
 		 }
+		return rand;
 	}
 	
 }

@@ -3,9 +3,16 @@ package com.annarestech.alert911.server;
 public class User {
 
 	private String zipCode;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String emailAddress;
-	private String Name;
+	private String name;
+	
+	public User(String name, String phone, String zip) {
+		this.name = name;
+		this.phoneNumber = phone;
+		this.zipCode = zip;
+	}
+	
 	
 	
 }
