@@ -16,8 +16,8 @@ public class CityDepartment {
 	private Hashtable<String, Location> locTable;
 	private HashSet<String> keywords;
 	private CallStream callStream;
-	private TextService tServ;
-	private UserBase uBase;
+	private static TextService tServ;
+	private static UserBase uBase;
 	public String Dep;
 	
 	public CityDepartment(String Dept, String account, String auth, String urlStream)	{
@@ -56,6 +56,7 @@ public class CityDepartment {
 			loc.addUser(u);
 		}
 		System.out.println("User added to Location and City");
+		tServ.newUser(u.phoneNumber);
 		return true;
 	}
 	

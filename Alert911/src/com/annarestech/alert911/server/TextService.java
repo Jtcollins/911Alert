@@ -66,6 +66,15 @@ public class TextService {
 		 }
 	}
 	
+	public boolean textAll(UserBase uB, String message)	{
+		for(int i = 0; i < uB.uBase.size(); i++)	{
+			User curr = uB.uBase.get(i);
+			textNum(curr.phoneNumber, message);
+		}
+		return true;
+
+	}
+	
 	public boolean newUser(String number)	{
 		String welcome = "Thank you for signing up, you will now be alerted";
 		return textNum(number, welcome);
@@ -76,6 +85,8 @@ public class TextService {
 			params.add(new BasicNameValuePair("To", number));
 			params.add(new BasicNameValuePair("Body", message));
 			Message m = messageFactory.create(params);
+			params.clear();
+			params.add(new BasicNameValuePair("From", fromNum));
 			return true;
 		} catch (TwilioRestException e) {
 			e.printStackTrace();
