@@ -68,7 +68,7 @@ public class GreetServiceImpl extends RemoteServiceServlet implements
 				.replaceAll(">", "&gt;");
 	}
 
-	@Override
+	/*
 	public String simulate() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		UserBase uBase = city.uBase; 
@@ -83,5 +83,5 @@ public class GreetServiceImpl extends RemoteServiceServlet implements
 		
 		city.tServ.textAll(uBase, mess);
 		return null;
-	}
+	}*/
 }

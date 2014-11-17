@@ -40,16 +40,15 @@ public class Alert911 implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Submit Details");
-		final Button simButton = new Button(".");
 		final TextBox nameField = new TextBox();
 		final TextBox phoneField = new TextBox();
 		final TextBox zipcodeField = new TextBox();
 		nameField.setText("Name");
 		phoneField.setText("Number without symbols or spaces");
 		zipcodeField.setText("Zip Code");
-		final Label disclaimerLabel = new Label();
+		//final Label disclaimerLabel = new Label();
 		final Label errorLabel = new Label();
-		disclaimerLabel.setText("The data made available here has been modified for use from its original source, which is the City of Seattle. Neither the City of Seattle nor the Office of the Chief Technology Officer (OCTO) makes any claims as to the completeness, timeliness, accuracy or content of any data contained in this application; makes any representation of any kind, including, but not limited to, warranty of the accuracy or fitness for a particular use; nor are any such warranties to be implied or inferred with respect to the information or data furnished herein. The data is subject to change as modifications and updates are complete. It is understood that the information contained in the web feed is being used at one's own risk.");
+		//disclaimerLabel.setText("The data made available here has been modified for use from its original source, which is the City of Seattle. Neither the City of Seattle nor the Office of the Chief Technology Officer (OCTO) makes any claims as to the completeness, timeliness, accuracy or content of any data contained in this application; makes any representation of any kind, including, but not limited to, warranty of the accuracy or fitness for a particular use; nor are any such warranties to be implied or inferred with respect to the information or data furnished herein. The data is subject to change as modifications and updates are complete. It is understood that the information contained in the web feed is being used at one's own risk.");
 
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
@@ -61,7 +60,6 @@ public class Alert911 implements EntryPoint {
 		RootPanel.get("zipcodeFieldContainer").add(zipcodeField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
-		RootPanel.get("simButtonContainer").add(simButton);
 		//RootPanel.get("disclaimerLabelContainer").add(disclaimerLabel);
 
 		// Focus the cursor on the name field when the app loads
@@ -96,18 +94,7 @@ public class Alert911 implements EntryPoint {
 			}
 		});
 		
-		simButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-					String offense = "WEAPON-DISCHARGE";
-					greetService.simulate(new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-
-							}
-
-							public void onSuccess(String result) {}});
-			}
-		});
+		
 	
 
 		// Create a handler for the sendButton and nameField
