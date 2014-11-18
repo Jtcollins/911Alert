@@ -39,10 +39,10 @@ public class CityDepartment {
 		tServ = new TextService(ACCOUNT_SID, AUTH_TOKEN);
 		locTable = new Hashtable();
 		uBase = new UserBase(this);
-		thread.start();
+		//thread.start();
 	}
 	
-	Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
+	/*Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
 		  public void run() {
 		    try {
 		      while (true) {
@@ -55,7 +55,7 @@ public class CityDepartment {
 		    }
 		  }
 		});
-	
+	*/
 	public boolean testTexts(String phone, String mess)	{
 		tServ.textNum(phone, mess);
 		return false;
