@@ -10,7 +10,11 @@ import com.google.appengine.api.backends.BackendServiceFactory;
 
 import com.twilio.*;
 
-
+/**
+ * 
+ * @author jessecollins90
+ *
+ */
 public class CityDepartment {
 	public static final String ACCOUNT_SID = "AC2178642fee43f41a62ce3016b6f34187";
 	public static final String AUTH_TOKEN = "aea844879d5df20922876ada64eb7390";
@@ -25,6 +29,13 @@ public class CityDepartment {
 	public CityDepartment c;
 	AtomicLong counter = new AtomicLong();
 	
+	/**
+	 * 
+	 * @param Dept
+	 * @param account
+	 * @param auth
+	 * @param urlStream
+	 */
 	public CityDepartment(String Dept, String account, String auth, String urlStream)	{
 		
 		URL stream;
@@ -39,10 +50,10 @@ public class CityDepartment {
 		tServ = new TextService(ACCOUNT_SID, AUTH_TOKEN);
 		locTable = new Hashtable();
 		uBase = new UserBase(this);
-		//thread.start();
+		thread.start();
 	}
 	
-	/*Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
+	Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
 		  public void run() {
 		    try {
 		      while (true) {
@@ -55,7 +66,7 @@ public class CityDepartment {
 		    }
 		  }
 		});
-	*/
+	
 	public boolean testTexts(String phone, String mess)	{
 		tServ.textNum(phone, mess);
 		return false;
