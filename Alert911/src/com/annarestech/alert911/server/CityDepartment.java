@@ -41,6 +41,7 @@ public class CityDepartment {
 		URL stream;
 		this.c = this;
 		keywords = new HashSet<String>();
+		//Example keywords, will set this up so individual cities can choose their own.
 		keywords.add("WEAPON-DISCHARGE");
 		keywords.add("THREATS-KILL");
 		keywords.add("THREATS-WEAPON");
@@ -50,11 +51,13 @@ public class CityDepartment {
 		tServ = new TextService(ACCOUNT_SID, AUTH_TOKEN);
 		locTable = new Hashtable();
 		uBase = new UserBase(this);
-		//thread.start();
+		thread.start();
 	}
 	
-	/*
 
+	/**
+	 * Reiterative thread that allows server to poll Socrata's API for new call logs.
+	 */
 	Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
 		  public void run() {
 		    try {
@@ -68,7 +71,6 @@ public class CityDepartment {
 		    }
 		  }
 		});
-	*/
 	
 	public boolean testTexts(String phone, String mess)	{
 		tServ.textNum(phone, mess);
@@ -80,10 +82,17 @@ public class CityDepartment {
 		return addUser(user);
 	}
 	
+	// Returns hashtable contaning all Location instances within this CityDepartment instance.
 	public Hashtable<String, Location> getLocT()	{
 		return locTable;
 	}
 	
+	/**
+	 * Add a user to this Userbase for city.
+	 * Also adds the user to their userbase in their respective zipcode.
+	 * @param u user that is to be added
+	 * @return true after user added
+	 */
 	public boolean addUser(User u)	{
 		uBase.addUser(u);
 		if(locTable.containsKey(u.getZip()))	{

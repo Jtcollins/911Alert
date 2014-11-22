@@ -43,7 +43,11 @@ public class TextService {
 	private List<NameValuePair> params;
 	private String fromNum;
 	
-	
+	/**
+	 * Initializes connection with Twilio service
+	 * @param account provided by twilio specific to client
+	 * @param auth provided by twilio specific to client
+	 */
 	TextService(String account, String auth)	{
 		TwilioRestClient client = new TwilioRestClient(account, auth);
 		fromNum = "+15107275968";
@@ -54,6 +58,12 @@ public class TextService {
 		 messageFactory = client.getAccount().getMessageFactory();
 	}
 	
+	/**
+	 * Will text every user in the Userbase within specified location.
+	 * @param loc the instance of location of specific zip
+	 * @param message
+	 * @return bool, whether message was sent successfully
+	 */
 	public boolean textAllinZip(Location loc, String message)	{
 		try	{
 			 Message mess = messageFactory.create(params); 
@@ -66,6 +76,12 @@ public class TextService {
 		 }
 	}
 	
+	/**
+	 * Texts all users in provided Userbase
+	 * @param uB
+	 * @param message
+	 * @return true when texting is completed.
+	 */
 	public boolean textAll(UserBase uB, String message)	{
 		for(int i = 0; i < uB.uBase.size(); i++)	{
 			User curr = uB.uBase.get(i);
@@ -75,11 +91,22 @@ public class TextService {
 
 	}
 	
+	/**
+	 * Sends a welcome SMS to new users.
+	 * @param number number to sms
+	 * @return bool whether text was successful.
+	 */
 	public boolean newUser(String number)	{
 		String welcome = "Thank you for signing up, you will now be alerted";
 		return textNum(number, welcome);
 	}
 	
+	/**
+	 * Texts a specific number
+	 * @param number
+	 * @param message
+	 * @return whether text was successful
+	 */
 	public boolean textNum(String number, String message)	{
 		try {
 			params.add(new BasicNameValuePair("To", number));
