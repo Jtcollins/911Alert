@@ -16,9 +16,10 @@ import com.twilio.*;
  *
  */
 public class CityDepartment {
-	public static final String ACCOUNT_SID = "AC2178642fee43f41a62ce3016b6f34187";
-	public static final String AUTH_TOKEN = "aea844879d5df20922876ada64eb7390";
-	public static final String SEATTLE_DATA = "https://data.seattle.gov/resource/7ais-f98f.json?offense_type=";
+	public static final String ACCOUNT_SID = "REDACTED";
+	public static final String AUTH_TOKEN = "REDACTED";
+	public static final String SOCRATA_TOKEN = "REDACTED";
+	public static final String SEATTLE_DATA = "https://data.seattle.gov/resource/7ais-f98f.json?" + SOCRATA_TOKEN + "offense_type=";
 	
 	private Hashtable<String, Location> locTable;
 	private HashSet<String> keywords;
