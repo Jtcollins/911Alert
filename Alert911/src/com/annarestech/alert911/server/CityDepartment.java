@@ -46,8 +46,9 @@ public class CityDepartment {
 		keywords.add("WEAPON-DISCHARGE");
 		keywords.add("THREATS-KILL");
 		keywords.add("THREATS-WEAPON");
-		//Thread crimeLoop = new Thread((Runnable) new CallStream(SEATTLE_DATA, keywords));
-		//crimeLoop.start();Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
+		Thread crimeLoop = new Thread((Runnable) new CallStream(SEATTLE_DATA, keywords));
+		crimeLoop.start();
+		//Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
 
 		tServ = new TextService(ACCOUNT_SID, AUTH_TOKEN);
 		locTable = new Hashtable();
